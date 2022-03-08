@@ -1,0 +1,22 @@
+
+
+{% block content %}
+
+{% if book.title %}
+<div class="flex">
+ <h1>{{ book.title }}</h1>
+</div>
+{% endif %}
+{% if book.author %}
+<div class="flex">
+ <h3>By: {{ book.author }}</h3>
+</div>
+{% endif %}
+{% if book.description %}
+<div class="flex">
+ <p>Description:</p>
+ <p>{{ book.description }}</p>
+</div>
+{% endif %}
+
+{% endblock %}

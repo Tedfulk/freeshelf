@@ -1,0 +1,15 @@
+
+
+{% block content %}
+<h1>Edit Book</h1>
+
+<div>
+ <form action="{% url 'edit_book' pk=book.pk %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div>
+   <button type="submit">Update Book</button>
+  </div>
+ </form>
+</div>
+{% endblock %}

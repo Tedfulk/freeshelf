@@ -1,0 +1,21 @@
+
+
+{% block content %}
+
+<h1>All Books</h1>
+
+<p><a href="{% url 'add_book' %}">Add New Book</a></p>
+
+<div>
+ {% for book in books %}
+ <div>
+  <h2><a href="{% url 'book_detail' pk=book.pk %}">{{ book.title }}</a></h2>
+  <p>{{ book.author }}</p>
+  <p>{{ book.created_at }}</p>
+ </div>
+ <a href="{% url 'edit_book' pk=book.pk %}">Edit Book</a><br />
+ <a href="{% url 'delete_book' pk=book.pk %}">Delete Book</a>
+ {% endfor %}
+</div>
+
+{% endblock %}
