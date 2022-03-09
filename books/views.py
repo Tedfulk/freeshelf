@@ -9,6 +9,11 @@ def home(request):
     return render(request, "home.html")
 
 
+def sort_title(request):
+    books = Book.objects.order_by('title')
+    return render(request, "book_list.html", {"books": books})
+
+
 def book_list(request):
     book = Book.objects.all()
     return render(request, "book_list.html", {"books": book})

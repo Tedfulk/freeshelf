@@ -8,9 +8,13 @@
  <p><a href="{% url 'add_book' %}">Add New Book</a></p>
 <div class="flex-wrap">
  <h4>Sort by:</h4>
- <button><a href="#" class="no-underline f4 fw6 db black link hover-blue"></a>Title</button>
- <button><a href="#" class="no-underline f4 fw6 db black link hover-blue"></a>Favorite</button>
- <button><a href="#"></a>Created date</button>
+ <a href="#"><button type="submit">Title</button></a>
+ <a href="#"><button type="submit">Favorite</button></a>
+ <a href="#"><button type="submit">Created Date</button></a>
+ <a href="#"><button type="submit">Javascript</button></a>
+ <a href="#"><button type="submit">Python</button></a>
+ <a href="#"><button type="submit">Django</button></a>
+ <a href="#"><button type="submit">Command Line</button></a>
 </div>
  <div>
   {% for book in books %}
