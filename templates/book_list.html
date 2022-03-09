@@ -1,21 +1,28 @@
-
+{% extends "base.html" %}
 
 {% block content %}
+<div class="messages ba br2 b--silver bg-washed-green pa2">
+ 
+ <h1>All Books</h1>
 
-<h1>All Books</h1>
-
-<p><a href="{% url 'add_book' %}">Add New Book</a></p>
-
-<div>
- {% for book in books %}
- <div>
-  <h2><a href="{% url 'book_detail' pk=book.pk %}">{{ book.title }}</a></h2>
-  <p>{{ book.author }}</p>
-  <p>{{ book.created_at }}</p>
- </div>
- <a href="{% url 'edit_book' pk=book.pk %}">Edit Book</a><br />
- <a href="{% url 'delete_book' pk=book.pk %}">Delete Book</a>
- {% endfor %}
+ <p><a href="{% url 'add_book' %}">Add New Book</a></p>
+<div class="flex-wrap">
+ <h4>Sort by:</h4>
+ <button><a href="#" class="no-underline f4 fw6 db black link hover-blue"></a>Title</button>
+ <button><a href="#" class="no-underline f4 fw6 db black link hover-blue"></a>Favorite</button>
+ <button><a href="#"></a>Created date</button>
 </div>
+ <div>
+  {% for book in books %}
+  <div>
+   <h2 class="flex"><a href="{% url 'book_detail' pk=book.pk %}" class="no-underline f4 fw6 db black link hover-blue">{{ book.title }} </a><i class="fa fa-star " aria-hidden="true"></i></h2>
+   <p>Written by: {{ book.author }}</p>
+   <p>Created at: {{ book.created_at }}</p>
+  </div>
+  <button><a href="{% url 'edit_book' pk=book.pk %}" class="no-underline black">Edit Book</a></button><br />
+  <button><a href="{% url 'delete_book' pk=book.pk %}" class="no-underline black">Delete Book</a></button>
+  {% endfor %}
+ </div>
 
+</div>
 {% endblock %}

@@ -16,7 +16,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
-    URL = models.CharField(max_length=500)
+    URL = models.URLField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

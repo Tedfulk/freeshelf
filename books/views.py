@@ -3,6 +3,12 @@ from .models import Book
 from .forms import BookForm
 
 
+def home(request):
+    if request.user.is_authenticated:
+        return redirect("book_list")
+    return render(request, "home.html")
+
+
 def book_list(request):
     book = Book.objects.all()
     return render(request, "book_list.html", {"books": book})

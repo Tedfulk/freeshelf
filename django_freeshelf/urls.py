@@ -19,8 +19,10 @@ from django.conf import settings
 from books import views as books_views
 
 urlpatterns = [
+    path('', books_views.home, name='home'),
+    path('auth/', include('registration.backends.default.urls')),
     path("admin/", admin.site.urls),
-    path('', books_views.book_list, name='book_list'),
+    path("albums/", books_views.book_list, name='book_list'),
     path('books/add/', books_views.add_book, name='add_book'),
     path('books/<int:pk>/edit/',
          books_views.edit_book,
