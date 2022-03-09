@@ -19,7 +19,7 @@
  <div>
   {% for book in books %}
   <div>
-   <h2 class="flex"><a href="{% url 'book_detail' pk=book.pk %}" class="no-underline f4 fw6 db black link hover-blue">{{ book.title }} </a><i class="fa fa-star " aria-hidden="true"></i></h2>
+   <h2 class="flex"><a href="{% url 'book_detail' pk=book.pk %}" class="no-underline f4 fw6 db black link hover-blue">{{ book.title }} </a><a href=""><i class="fa fa-star " aria-hidden="true"></i></a></h2>
    <p>Written by: {{ book.author }}</p>
    <p>Created at: {{ book.created_at }}</p>
   </div>
