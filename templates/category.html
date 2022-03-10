@@ -6,10 +6,9 @@
  {{ category.name }}
 </h1>
 {% for book in books %}
-{% if book in category %}
+<span class="fw7 f4 fw6 db black">{{ book.title }}</span>
+<p class="db black-60 mt2">{{ book.author }}</p>
 
-<p>{{ book.title }}</p>
 
-{% endif %}
 {% endfor %}
 {% endblock %}
