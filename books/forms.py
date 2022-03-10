@@ -10,4 +10,5 @@ class BookForm(forms.ModelForm):
             'author',
             'description',
             'URL',
+            'category',
         ]

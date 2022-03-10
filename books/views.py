@@ -1,6 +1,8 @@
+from unicodedata import category
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Book
+from .models import Book, Category
 from .forms import BookForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 def home(request):
@@ -9,16 +11,35 @@ def home(request):
     return render(request, "home.html")
 
 
-def sort_title(request):
-    books = Book.objects.order_by('title')
-    return render(request, "book_list.html", {"books": books})
+@login_required
+def title(request):
+    title = Book.objects.order_by('title')
+    context = {'books': title}
+    return render(request, "book_list.html", context)
 
 
+@login_required
+def newest(request):
+    newest = Book.objects.order_by('-created_at')
+    context = {'books': newest}
+    return render(request, "book_list.html", context)
+
+
+@login_required
+def oldest(request):
+    books = Book.objects.order_by('created_at')
+    context = {'books': books}
+    return render(request, "book_list.html", context)
+
+
+@login_required
 def book_list(request):
-    book = Book.objects.all()
-    return render(request, "book_list.html", {"books": book})
+    books = Book.objects.all()
+    categorys = Category.objects.all()
+    return render(request, "book_list.html", {"books": books, "categorys": categorys})
 
 
+@login_required
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     form = BookForm()
@@ -29,6 +50,7 @@ def book_detail(request, pk):
     )
 
 
+@login_required
 def delete_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
@@ -38,6 +60,12 @@ def delete_book(request, pk):
                   {"book": book})
 
 
+def check_admin_user(user):
+    return user.is_staff
+
+
+@login_required
+@user_passes_test(check_admin_user)
 def add_book(request):
     if request.method == 'GET':
         form = BookForm()
@@ -50,6 +78,7 @@ def add_book(request):
     return render(request, "add_book.html", {"form": form})
 
 
+@login_required
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'GET':
@@ -64,3 +93,17 @@ def edit_book(request, pk):
         "form": form,
         "book": book
     })
+
+
+def category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    books = category.books.all()
+
+    return render(request, "category.html", {"category": category, "books": books})
+
+
+# @login_required
+# def add_favorite(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     user = request.user
+#     user.favorite_book

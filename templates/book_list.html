@@ -3,30 +3,32 @@
 {% block content %}
 <div class="messages ba br2 b--silver bg-washed-green pa2">
  
- <h1>All Books</h1>
+  <h1>All Books</h1>
 
- <p><a href="{% url 'add_book' %}">Add New Book</a></p>
-<div class="flex-wrap">
- <h4>Sort by:</h4>
- <a href="#"><button type="submit">Title</button></a>
- <a href="#"><button type="submit">Favorite</button></a>
- <a href="#"><button type="submit">Created Date</button></a>
- <a href="#"><button type="submit">Javascript</button></a>
- <a href="#"><button type="submit">Python</button></a>
- <a href="#"><button type="submit">Django</button></a>
- <a href="#"><button type="submit">Command Line</button></a>
-</div>
- <div>
-  {% for book in books %}
-  <div>
-   <h2 class="flex"><a href="{% url 'book_detail' pk=book.pk %}" class="no-underline f4 fw6 db black link hover-blue">{{ book.title }} </a><a href=""><i class="fa fa-star " aria-hidden="true"></i></a></h2>
-   <p>Written by: {{ book.author }}</p>
-   <p>Created at: {{ book.created_at }}</p>
+  <div class="flex-wrap">
+   
+   <a href="{% url 'title' %}"><button type="submit">Title</button></a>
+   <a href="{% url 'oldest' %}"><button type="submit">Oldest</button></a>
+   <a href="{% url 'newest' %}"><button type="submit">Newest</button></a>
   </div>
-  <button><a href="{% url 'edit_book' pk=book.pk %}" class="no-underline black">Edit Book</a></button><br />
-  <button><a href="{% url 'delete_book' pk=book.pk %}" class="no-underline black">Delete Book</a></button>
-  {% endfor %}
- </div>
+  <div class="flex-wrap">
+   <h4>Sort by:</h4>
+   {% for category in categorys %}
+   <a href="{% url 'category' slug=category.slug %}" class="flex-wrap"><button type="submit">{{ category.name }}</button></a>
+   {% endfor %}
+  </div>
+
+  <div>
+   {% for book in books %}
+   <div>
+    <h2 class="flex"><a href="{% url 'book_detail' pk=book.pk %}" class="no-underline f4 fw6 db black link hover-blue">{{ book.title }} </a><a href=""><i class="fa fa-star " aria-hidden="true"></i></a></h2>
+    <p>Written by: {{ book.author }}</p>
+    <p>Created at: {{ book.created_at }}</p>
+   </div>
+   <button><a href="{% url 'edit_book' pk=book.pk %}" class="no-underline black">Edit Book</a></button><br />
+   <button><a href="{% url 'delete_book' pk=book.pk %}" class="no-underline black">Delete Book</a></button>
+   {% endfor %}
+  </div>
 
 </div>
 {% endblock %}
